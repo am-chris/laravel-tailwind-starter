@@ -14,7 +14,7 @@ class UserPhotoTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function testAvatarUpload()
+    public function usersCanUploadAnAvatar()
     {
         $user = factory(User::class)->create(['avatar_path' => 'test.jpg']);
 
@@ -32,5 +32,47 @@ class UserPhotoTest extends TestCase
             'id' => $user->id,
             'avatar_path' => $response->decodeResponseJson()['path'],
         ]);
+    }
+    
+    /** @test */
+    public function previousAvatarsGetDeletedWhenNewOneIsUploaded()
+    {
+        $user = factory(User::class)->create(['avatar_path' => 'test.jpg']);
+
+        Storage::fake('public');
+
+        $response = $this->actingAs($user)
+            ->json('POST', route('users.avatars.store', $user->id), [
+                'avatar' => UploadedFile::fake()->image('avatar.png')
+            ]);
+
+        $avatarPath = $response->decodeResponseJson()['path'];
+
+        // Assert the file was stored...
+        Storage::disk('public')->assertExists($avatarPath);
+
+        $this->assertDatabaseHas('users', [
+            'id' => $user->id,
+            'avatar_path' => $avatarPath,
+        ]);
+
+
+        $response = $this->actingAs($user)
+            ->json('POST', route('users.avatars.store', $user->id), [
+                'avatar' => UploadedFile::fake()->image('avatar.png')
+            ]);
+
+        $avatarPath2 = $response->decodeResponseJson()['path'];
+
+        // Assert the file was stored...
+        Storage::disk('public')->assertExists($avatarPath2);
+        Storage::disk('public')->assertMissing($avatarPath);
+
+        $this->assertDatabaseHas('users', [
+            'id' => $user->id,
+            'avatar_path' => $avatarPath2,
+        ]);
+
+
     }
 }

@@ -41,38 +41,4 @@ class UserTest extends TestCase
             'email' => 'john@email.com',
         ]);
     }
-
-    /** @test */
-    public function userCanChangeTheirPassword()
-    {
-        $user = factory(User::class)->create(['password' => bcrypt('password')]);
-
-        $this->actingAs($user)
-            ->json('PUT', route('users.update_password', $user->id), [
-                'current_password' => 'password',
-                'new_password' => 'password2',
-                'new_password_confirmation' => 'password2',
-            ]);
-
-        $user->refresh();
-
-        $this->assertTrue(Hash::check('password2', $user->password));
-    }
-
-    /** @test */
-    public function userCantChangePasswordIfCurrentPasswordIsIncorrect()
-    {
-        $user = factory(User::class)->create(['password' => bcrypt('password')]);
-
-        $this->actingAs($user)
-            ->json('PUT', route('users.update_password', $user->id), [
-                'current_password' => 'password',
-                'new_password' => 'password2',
-                'new_password_confirmation' => 'password2',
-            ]);
-
-        $user->refresh();
-
-        $this->assertTrue(Hash::check('password2', $user->password));
-    }
 }

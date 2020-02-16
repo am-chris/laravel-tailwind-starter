@@ -39,6 +39,8 @@ class UserAvatarController extends Controller
     {
         $path = Storage::disk('public')->putFile('avatars', $request->avatar);
 
+        Storage::disk('public')->delete($user->avatar_path);
+
         $user->update([
             'avatar_path' => $path,
         ]);

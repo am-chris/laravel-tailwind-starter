@@ -48,7 +48,7 @@
                     @endif
 
                     <label>Select an Image</label>
-                    <input type="file" name="avatar" class="form-control" required>
+                    <input type="file" id="avatar" name="avatar" class="form-control" accept=".png,.jpg,.jpeg" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Upload</button>
