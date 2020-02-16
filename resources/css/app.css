@@ -109,7 +109,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .form-group label {
-    @apply .mb-2 .block .text-sm;
+    @apply .mb-2 .block .text-xs .uppercase .tracking-wide .font-semibold .text-gray-700;
 }
 
 .form-control {
@@ -117,7 +117,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn {
-    @apply tracking-wide uppercase font-semibold px-3 py-2 text-white text-xs rounded bg-white border;
+    border-radius: 0px;
+    @apply border-none tracking-wide uppercase font-semibold px-3 py-2 text-white text-xs rounded bg-white;
 }
 
 .btn.btn-primary {
@@ -129,11 +130,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card .card-header {
-    @apply border-b px-5 py-4 bg-gray-100;
+    @apply border-b px-5 py-4 bg-white;
 }
 
 .card .card-header .card-title {
-    @apply tracking-wide font-semibold text-gray-700 text-sm uppercase;
+    @apply tracking-wide font-semibold text-gray-800 text-sm uppercase;
 }
 
 .card .card-body {

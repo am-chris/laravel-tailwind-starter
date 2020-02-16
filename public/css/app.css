@@ -12209,7 +12209,11 @@ h1, h2, h3, h4, h5, h6 {
 .form-group label {
   margin-bottom: 0.5rem;
   display: block;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  font-weight: 600;
+  color: #4a5568;
 }
 
 .form-control {
@@ -12226,6 +12230,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn {
+  border-radius: 0px;
+  border-style: none;
   letter-spacing: 0.025em;
   text-transform: uppercase;
   font-weight: 600;
@@ -12237,7 +12243,6 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.75rem;
   border-radius: 0.25rem;
   background-color: #fff;
-  border-width: 1px;
 }
 
 .btn.btn-primary {
@@ -12257,13 +12262,13 @@ h1, h2, h3, h4, h5, h6 {
   padding-right: 1.25rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  background-color: #f7fafc;
+  background-color: #fff;
 }
 
 .card .card-header .card-title {
   letter-spacing: 0.025em;
   font-weight: 600;
-  color: #4a5568;
+  color: #2d3748;
   font-size: 0.875rem;
   text-transform: uppercase;
 }
