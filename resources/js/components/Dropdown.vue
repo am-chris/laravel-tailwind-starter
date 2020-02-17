@@ -1,16 +1,21 @@
 <template>
-    <div :class="inline == true ? 'inline' : 'block'">
+    <div :class="inline == true ? 'inline' : 'block'" class="relative">
         <button type="button" 
-            class="w-full h-full top-0 right-0 left-0 bottom-0 absolute z-10 block" 
+            class="fixed inset-0 h-full w-full cursor-default" 
             @click="visible = false" 
             v-if="visible"
         ></button>
 
         <button class="relative px-1 z-30" @click="visible = !visible">
             <slot></slot>
+
+            <svg v-if="caret" class="fill-current text-white opacity-50 h-4 w-4 inline-block ml-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                <path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path>
+            </svg>
         </button>
 
-        <div class="right-0 mr-3 bg-white text-gray-400 list-none absolute w-32 text-left shadow-lg rounded mt-1 p-0 rounded hover:rounded z-20" 
+        <div class="bg-white text-gray-400 list-none absolute w-40 text-left shadow-lg rounded mt-2 p-0 rounded hover:rounded z-20" 
+            :class="{ 'w-64': full, 'right-0': position == 'right', 'left-0': position == 'left' }"
             v-if="visible == true">
             <slot name="dropdown-items"></slot>
         </div>
@@ -25,6 +30,21 @@ export default {
             required: false,
             default: false,
         },
+        full: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
+        caret: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
+        position: {
+            type: String,
+            required: false,
+            default: 'left',
+        }
     },
 
     data() {

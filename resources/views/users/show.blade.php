@@ -43,7 +43,11 @@
                 <div class="form-group">
                     @if ($user->avatar_path)
                         <label for="avatar">
-                            <img src="{{ asset($user->avatar_path) }}" class="h-16 w-16 mb-6 rounded-full border-gray-500 border shadow">
+                            <avatar
+                                :user-id="{{ auth()->user()->id }}"
+                                large
+                                class="mb-4"
+                            ></avatar>
                         </label>
                     @endif
 
