@@ -23,5 +23,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('users/{user}/password', 'UserController@update_password')->name('users.update_password');
 
     Route::post('users/{user}/avatars', 'UserAvatarController@store')->name('users.avatars.store');
+
+    Route::post('users/{user}/logout_other_devices', 'user\LogoutOtherDevicesController')->name('users.logout_other_devices');
 });
 

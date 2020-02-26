@@ -94,6 +94,51 @@
         </div>
     </form>
 
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Login History</div>
+        </div>
+
+        <div class="card-body">
+            <table class="table w-full text-left mb-8">
+                <thead class="font-semibold text-gray-700 uppercase text-xs">
+                    <th class="py-4 px-4">Operating System</th>
+                    <th class="py-4 px-4">Browser</th>
+                    <th class="py-4 px-4">IP Address</th>
+                </thead>
+                <tbody>
+                    @foreach ($user->loginHistory as $loginHistory)
+                        <tr>
+                            <td class="py-4 px-4 text-sm">
+                                {{ $loginHistory->operating_system }}
+                            </td>
+                            <td class="py-4 px-4 text-sm">
+                                {{ $loginHistory->browser }}
+                            </td>
+                            <td class="py-4 px-4 text-sm">
+                                {{ $loginHistory->ip_address }}
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+            <form action="{{ route('users.logout_other_devices', $user->id) }}" method="POST">
+                @csrf
+
+                <p>If you've noticed a suspicious login, log your account out from all other devices by completing the form below. After you do that, you should change your password.</p>
+
+                <div class="form-group">
+                    <label for="password">Current Password</label>
+                    <input type="password" name="password" class="form-control" required>
+                </div>
+
+                <button type="submit" class="btn btn-warning">Logout Other Devices</button>
+            </form>
+            
+        </div>
+    </div>
+
 
 </div>
 @endsection

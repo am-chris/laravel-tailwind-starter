@@ -117,7 +117,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn {
-    @apply border-none tracking-wide uppercase font-semibold px-3 rounded-sm py-2 text-white text-xs bg-white;
+    @apply border-none tracking-wide uppercase font-semibold px-4 rounded py-3 text-white text-xs bg-gray-300;
+}
+
+p {
+    @apply mb-5 leading-normal;
 }
 
 .sidebar {
@@ -134,6 +138,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn.btn-primary {
     @apply bg-indigo-600;
+}
+
+.btn.btn-warning {
+    @apply bg-yellow-400 text-gray-800;
 }
 
 .card {

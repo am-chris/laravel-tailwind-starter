@@ -75,7 +75,7 @@
         @else
             @include('layouts.sidebar')
 
-            <div class="xs:ml-0 sm:ml-0 lg:ml-48 pt-20 pl-5 mr-6"> <!-- pt-20 if using fixed top-navbar -->
+            <div class="xs:ml-0 sm:ml-0 lg:ml-48 pt-20 pl-5 mr-6 pb-48"> <!-- pt-20 if using fixed top-navbar -->
                 @yield('content')
             </div>
         @endguest
