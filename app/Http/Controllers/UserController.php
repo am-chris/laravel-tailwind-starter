@@ -70,7 +70,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $this->authorize('update', [auth()->user(), $user]);
+        $this->authorize('update', [$user]);
 
         $user->update($request->all());
 
@@ -90,7 +90,7 @@ class UserController extends Controller
 
     public function update_password(Request $request, User $user)
     {
-        $this->authorize('update', [auth()->user(), $user]);
+        $this->authorize('update', [$user]);
 
         $request->validate([
             'current_password' => 'required',

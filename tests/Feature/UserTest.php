@@ -41,4 +41,34 @@ class UserTest extends TestCase
             'email' => 'john@email.com',
         ]);
     }
+
+    /** @test */
+    public function guestCannotChangeAUsersDetails()
+    {
+        $user = factory(User::class)->create(['name' => 'Jimmy', 'email' => 'jimmy@email.com']);
+
+        $this->json('PUT', route('users.update', $user->id), [
+            'email' => 'john@email.com',
+        ]);
+
+        $this->assertDatabaseHas('users', [
+            'email' => 'jimmy@email.com',
+        ]);
+    }
+
+    /** @test */
+    public function userCannotChangeAnotherUsersDetails()
+    {
+        $user = factory(User::class)->create(['name' => 'Jimmy', 'email' => 'jimmy@email.com']);
+        $user2 = factory(User::class)->create(['name' => 'John', 'email' => 'john@email.com']);
+
+        $this->actingAs($user2)
+            ->json('PUT', route('users.update', $user->id), [
+                'email' => 'john2@email.com',
+            ]);
+
+        $this->assertDatabaseMissing('users', [
+            'email' => 'john2@email.com',
+        ]);
+    }
 }

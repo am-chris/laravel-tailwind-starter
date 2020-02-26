@@ -30,7 +30,7 @@ class UserPasswordTest extends TestCase
     }
 
     /** @test */
-    public function userCantChangePasswordIfCurrentPasswordIsIncorrect()
+    public function userCannotChangePasswordIfCurrentPasswordIsIncorrect()
     {
         $user = factory(User::class)->create(['password' => bcrypt('password')]);
 
@@ -44,5 +44,39 @@ class UserPasswordTest extends TestCase
         $user->refresh();
 
         $this->assertTrue(Hash::check('password2', $user->password));
+    }
+
+    /** @test */
+    public function guestCannotChangeAnotherUsersPassword()
+    {
+        $user = factory(User::class)->create(['password' => bcrypt('password')]);
+
+        $this->json('PUT', route('users.update_password', $user->id), [
+            'current_password' => 'password',
+            'new_password' => 'password2',
+            'new_password_confirmation' => 'password2',
+        ]);
+
+        $user->refresh();
+
+        $this->assertTrue(Hash::check('password', $user->password));
+    }
+
+    /** @test */
+    public function userCannotChangeAnotherUsersPassword()
+    {
+        $user = factory(User::class)->create(['password' => bcrypt('password')]);
+        $user2 = factory(User::class)->create();
+
+        $this->actingAs($user2)
+            ->json('PUT', route('users.update_password', $user->id), [
+                'current_password' => 'password',
+                'new_password' => 'password2',
+                'new_password_confirmation' => 'password2',
+            ]);
+
+        $user->refresh();
+
+        $this->assertTrue(Hash::check('password', $user->password));
     }
 }
