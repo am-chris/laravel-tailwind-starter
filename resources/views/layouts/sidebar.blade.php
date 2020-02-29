@@ -1,4 +1,4 @@
-<div class="sidebar py-0 fixed top-16 left-0 w-48 h-full hidden lg:block" style="top: 56px;">
+<div class="sidebar py-5 fixed top-16 left-0 w-48 h-full hidden lg:block" style="top: 56px;">
     <div class="px-4">
     
         <div class="mb-6">

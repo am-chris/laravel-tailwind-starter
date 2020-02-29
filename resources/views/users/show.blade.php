@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="mx-auto w-2/3">
+<div class="mx-auto md:w-2/3 sm:w-full">
 
     <form action="{{ route('users.update', $user->id) }}" method="POST">
         @csrf
@@ -44,9 +44,9 @@
                     @if ($user->avatar_path)
                         <label for="avatar">
                             <avatar
-                                :user-id="{{ auth()->user()->id }}"
+                                :user="{{ json_encode(auth()->user()) }}"
                                 large
-                                class="mb-4"
+                                class="mb-6"
                             ></avatar>
                         </label>
                     @endif
@@ -100,33 +100,35 @@
         </div>
 
         <div class="card-body">
-            <table class="table w-full text-left mb-8">
-                <thead class="font-semibold text-gray-700 uppercase text-xs">
-                    <th class="py-4 px-4">Operating System</th>
-                    <th class="py-4 px-4">Browser</th>
-                    <th class="py-4 px-4">IP Address</th>
-                </thead>
-                <tbody>
-                    @foreach ($user->loginHistory as $loginHistory)
-                        <tr>
-                            <td class="py-4 px-4 text-sm">
-                                {{ $loginHistory->operating_system }}
-                            </td>
-                            <td class="py-4 px-4 text-sm">
-                                {{ $loginHistory->browser }}
-                            </td>
-                            <td class="py-4 px-4 text-sm">
-                                {{ $loginHistory->ip_address }}
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <div class="overflow-y-auto h-64 max-h-full mb-8">
+                <table class="table w-full text-left">
+                    <thead class="font-semibold text-gray-700 uppercase text-xs">
+                        <th class="py-4 px-4">Operating System</th>
+                        <th class="py-4 px-4">Browser</th>
+                        <th class="py-4 px-4">IP Address</th>
+                    </thead>
+                    <tbody>
+                        @foreach ($user->loginHistory as $loginHistory)
+                            <tr>
+                                <td class="py-4 px-4 text-sm">
+                                    {{ $loginHistory->operating_system }}
+                                </td>
+                                <td class="py-4 px-4 text-sm">
+                                    {{ $loginHistory->browser }}
+                                </td>
+                                <td class="py-4 px-4 text-sm">
+                                    {{ $loginHistory->ip_address }}
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
             <form action="{{ route('users.logout_other_devices', $user->id) }}" method="POST">
                 @csrf
 
-                <p>If you've noticed a suspicious login, log your account out from all other devices by completing the form below. After you do that, you should change your password.</p>
+                <p>If you notice a suspicious login, log your account out from all other devices by completing the form below. After you do that, you should change your password.</p>
 
                 <div class="form-group">
                     <label for="password">Current Password</label>

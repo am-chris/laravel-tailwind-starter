@@ -1,12 +1,12 @@
 <template>
-    <div :class="inline == true ? 'inline' : 'block'" class="relative">
+    <div :class="inline == true ? 'inline-block' : 'block'" class="relative">
         <button type="button" 
             class="fixed inset-0 h-full w-full cursor-default" 
             @click="visible = false" 
             v-if="visible"
         ></button>
 
-        <button class="relative px-1 z-30" @click="visible = !visible">
+        <button class="relative inline-block px-1 z-30" @click="visible = !visible">
             <slot></slot>
 
             <svg v-if="caret" class="fill-current text-white opacity-50 h-4 w-4 inline-block ml-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">

@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('avatar', require('./components/Avatar.vue').default);
 Vue.component('dropdown', require('./components/Dropdown.vue').default);
+Vue.component('mobile-menu', require('./components/MobileMenu.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
