@@ -3,12 +3,26 @@
         <img 
             class="inline-block mr-2 rounded" 
             :class="{ 'h-16 w-16': large, 'h-12 w-12': medium, 'h-8 w-8': small }"
-            :src="'/' + user.avatar_path">
-        <span v-if="withName" class="ml-1 text-left">
+            :src="'/' + user.avatar_path"
+            v-if="user"
+        >
+        <div 
+            class="inline-flex bg-gray-200 items-center justify-center mr-2 rounded"
+            :class="{ 'h-16 w-16': large, 'h-12 w-12': medium, 'h-8 w-8': small, 'text-gray-500 bg-gray-300': light, 'text-gray-100 bg-gray-600': dark }"
+            v-else
+        >
+            <svg
+                :class="{ 'h-8 w-8': large, 'h-5 w-5': medium, 'h-3 w-3': small }" 
+                aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" class="fill-current" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path fill="currentColor" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"></path>
+            </svg>
+        </div>
+
+        <span v-if="user && user.avatar_path && withName" class="ml-1 text-left">
             <p 
                 class="font-semibold" 
                 :class="{ 
-                    'text-gray-100': light, 'text-lg': large, 
+                    'text-gray-100': light, 'text-gray-800': dark, 'text-lg': large, 
                     'text-sm': small, 'mb-1': medium || large, 'mb-0': small,
                 }">
                 {{ user.name }}
@@ -17,7 +31,7 @@
             <!-- prop: subtext -->
             <span 
                 :class="{ 
-                    'text-gray-300': light, 'text-gray-600': light == false, 
+                    'text-gray-300': light, 'text-gray-600': dark, 
                     'text-xs': small, 'text-sm': medium || large 
                 }" 
                 v-if="subtext"
@@ -39,12 +53,12 @@ export default {
         },
         user: {
             type: Object,
-            required: true,
+            required: false,
         },
         small: {
             type: Boolean,
             required: false,
-            default: true,
+            default: false,
         },
         medium: {
             type: Boolean,
@@ -66,6 +80,11 @@ export default {
             required: false,
         },
         light: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
+        dark: {
             type: Boolean,
             required: false,
             default: false,

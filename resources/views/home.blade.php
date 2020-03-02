@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="w-full p-6">
-                    <p class="text-gray-700">
+                    <p class="text-gray-700 mb-0">
                         You are logged in!
                     </p>
                 </div>

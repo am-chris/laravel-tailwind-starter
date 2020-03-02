@@ -45,6 +45,7 @@
                                         <avatar 
                                             :user="{{ json_encode(auth()->user()) }}"
                                             with-name
+                                            small
                                             light
                                         ></avatar>
                                         
@@ -52,6 +53,11 @@
                                             <li>
                                                 <a href="{{ route('users.show', auth()->user()->id) }}" class="text-gray-800 p-3 block hover:bg-gray-200 hover:rounded">
                                                     Profile
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('settings.index') }}" class="text-gray-800 p-3 block hover:bg-gray-200 hover:rounded">
+                                                    Settings
                                                 </a>
                                             </li>
                                             <li>

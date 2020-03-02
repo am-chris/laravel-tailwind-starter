@@ -69,18 +69,18 @@ html { font-family: 'Inter', sans-serif; }
 }
 
 h1 {
-    font-size: 36px;
-    margin-bottom: 16px;
+    font-size: 31px;
+    margin-bottom: 18px;
 }
 
 h2 {
-    font-size: 30px;
-    margin-bottom: 14px;
+    font-size: 28px;
+    margin-bottom: 15px;
 }
 
 h3 {
     font-size: 24px;
-    margin-bottom: 12px;
+    margin-bottom: 13px;
 }
 
 h4 {
@@ -161,6 +161,10 @@ p {
 .card .card-body {
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
+    @apply px-5 py-5;
+}
+
+.card .card-footer {
     @apply px-5 py-5;
 }
 
