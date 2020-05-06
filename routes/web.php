@@ -28,5 +28,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', 'UserController');
     
     Route::resource('settings', 'SettingController');
+
+
+    // Demo
+    Route::get('components', function () {
+        return view('components');
+    });
 });
 

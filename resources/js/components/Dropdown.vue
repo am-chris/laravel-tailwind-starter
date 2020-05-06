@@ -1,12 +1,15 @@
 <template>
-    <div :class="inline == true ? 'inline-block' : 'block'" class="relative">
+    <div 
+        class="relative"
+        :class="{ 'inline-block': inline, 'block': !inline, 'text-left': position == null || position == 'left', 'text-right': position == 'right' }" 
+    >
         <button type="button" 
             class="fixed inset-0 h-full w-full cursor-default" 
-            @click="visible = false" 
-            v-if="visible"
+            @click="toggleVisibility()" 
+            v-if="visible && alwaysVisible == false"
         ></button>
 
-        <button class="relative inline-block px-1 z-30" @click="visible = !visible">
+        <button class="relative inline-block px-1 z-30" @click="toggleVisibility()">
             <slot></slot>
 
             <svg v-if="caret" class="fill-current text-white opacity-50 h-4 w-4 inline-block ml-1" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
@@ -44,13 +47,30 @@ export default {
             type: String,
             required: false,
             default: 'left',
+        },
+        alwaysVisible: {
+            type: Boolean,
+            required: false,
+            default: false,
         }
     },
 
     data() {
         return {
-            visible: false,
+            visible: this.alwaysVisible == false ? false : true,
         };
+    },
+
+    methods: {
+        toggleVisibility() {
+            if (this.alwaysVisible == true) {
+                this.visible = true;
+
+                return;
+            }
+
+            this.visible = !this.visible;
+        }
     }
 }
 </script>

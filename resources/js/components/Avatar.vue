@@ -1,14 +1,14 @@
 <template>
     <div class="flex items-center" :class="inline ? 'inline-flex' : 'flex'">
         <img 
-            class="inline-block mr-2 rounded" 
+            class="inline-block rounded" 
             :class="{ 'h-16 w-16': large, 'h-12 w-12': medium, 'h-8 w-8': small }"
             :src="'/' + user.avatar_path"
-            v-if="user"
+            v-if="user && user.avatar_path"
         >
         <div 
-            class="inline-flex bg-gray-200 items-center justify-center mr-2 rounded"
-            :class="{ 'h-16 w-16': large, 'h-12 w-12': medium, 'h-8 w-8': small, 'text-gray-500 bg-gray-300': light, 'text-gray-100 bg-gray-600': dark }"
+            class="inline-flex bg-gray-200 text-gray-600 items-center justify-center rounded"
+            :class="{ 'h-16 w-16': large, 'h-12 w-12': medium, 'h-8 w-8': small }"
             v-else
         >
             <svg
@@ -18,11 +18,11 @@
             </svg>
         </div>
 
-        <span v-if="user && user.avatar_path && withName" class="ml-1 text-left">
+        <span v-if="user && withName" class="ml-3 text-left">
             <p 
                 class="font-semibold" 
                 :class="{ 
-                    'text-gray-100': light, 'text-gray-800': dark, 'text-lg': large, 
+                    'text-gray-100': color == 'light', 'text-gray-800': color == 'dark', 'text-lg': large, 
                     'text-sm': small, 'mb-1': medium || large, 'mb-0': small,
                 }">
                 {{ user.name }}
@@ -31,7 +31,7 @@
             <!-- prop: subtext -->
             <span 
                 :class="{ 
-                    'text-gray-300': light, 'text-gray-600': dark, 
+                    'text-gray-300': color == 'light', 'text-gray-600': color == 'dark', 
                     'text-xs': small, 'text-sm': medium || large 
                 }" 
                 v-if="subtext"
@@ -79,15 +79,10 @@ export default {
             type: String,
             required: false,
         },
-        light: {
-            type: Boolean,
+        color: {
+            type: String,
             required: false,
-            default: false,
-        },
-        dark: {
-            type: Boolean,
-            required: false,
-            default: false,
+            default: 'dark',
         }
     },
 

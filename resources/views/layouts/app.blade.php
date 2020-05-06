@@ -46,11 +46,11 @@
                                             :user="{{ json_encode(auth()->user()) }}"
                                             with-name
                                             small
-                                            light
+                                            color="light"
                                         ></avatar>
                                         
                                         <template v-slot:dropdown-items>
-                                            <li>
+                                            <li class="pt-1">
                                                 <a href="{{ route('users.show', auth()->user()->id) }}" class="text-gray-800 p-3 block hover:bg-gray-200 hover:rounded">
                                                     Profile
                                                 </a>
@@ -60,7 +60,7 @@
                                                     Settings
                                                 </a>
                                             </li>
-                                            <li>
+                                            <li class="pb-1">
                                                 <a href="{{ route('logout') }}"
                                                     class="text-gray-800 p-3 block hover:bg-gray-200 hover:rounded"
                                                     onclick="event.preventDefault();

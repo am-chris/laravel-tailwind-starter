@@ -13,6 +13,7 @@
                     :user="user"
                     small
                     with-name
+                    color="dark"
                     class="mb-8"
                 ></avatar>
 

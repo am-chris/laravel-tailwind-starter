@@ -8,6 +8,7 @@
                 :user="{{ json_encode(auth()->user()) }}"
                 with-name
                 large
+                color="dark"
                 class="mb-6"
             ></avatar>
         @endif
